@@ -1,16 +1,25 @@
-import todos from "./data";
+const INITIAL_STATE = {
+  loading: false,
+  posts: [],
+  errors: null,
+};
 
-const appReducer = (state = todos, action) => {
-  let newTodos;
+const appReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "ADD_TODO_SAGA":
-      newTodos = [...state];
-      newTodos.push(action.payload);
-      return newTodos;
-    case "DELETE_TODO_SAGA":
-      newTodos = [...state];
-      newTodos = newTodos.filter((todo) => todo.id !== action.payload);
-      return newTodos;
+    case "LOAD_POST_START":
+      return { ...state, loading: true };
+    case "LOAD_POST_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        posts: action.payload,
+      };
+    case "LOAD_POST_FAIL":
+      return {
+        ...state,
+        loading: false,
+        errors: action.payload,
+      };
     default:
       return state;
   }

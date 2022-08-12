@@ -1,14 +1,4 @@
-let todos = [{
-    id: 0.11,
-    name: 'Homework'
-},
-{
-    id: 0.22,
-    name: 'HouseWork'
-},
-{
-    id: 0.33,
-    name: 'CleanHouse'
-},]
+import axios from "axios";
 
-export default todos
+export const loadPostApi = async () => 
+await axios.get('https://jsonplaceholder.typicode.com/posts')

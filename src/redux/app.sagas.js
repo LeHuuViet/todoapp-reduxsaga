@@ -1,22 +1,17 @@
 import { takeLatest, put, all, call } from "redux-saga/effects";
-import { deleteTodoSaga, addTodoSaga } from "./app.action";
+import { loadPostSuccess, loadPostFail } from "./app.action";
+import { loadPostApi } from "./data";
 
-export function* onAddTodoSaga(payload) {
-  yield put(addTodoSaga(payload));
+export function* onLoadPostStartAsync() {
+  try {
+    const response = yield call(loadPostApi);
+    yield put(loadPostSuccess(response.data));
+  }
+  catch (error) {
+    yield put(loadPostFail(error));
+  }
 }
 
-export function* onDeleteTodoSaga({ payload: { id } }) {
-  yield put(deleteTodoSaga(id));
-}
-
-export function* onAdd() {
-  yield takeLatest("ADD_TODO", onAddTodoSaga);
-}
-
-export function* onDelete() {
-  yield takeLatest("DELETE_TODO", onDeleteTodoSaga);
-}
-
-export function* todos() {
-  yield all([call(onDelete), call(onAdd)]);
+export function* onLoadPost() {
+  yield takeLatest('LOAD_POST_START', onLoadPostStartAsync);
 }
