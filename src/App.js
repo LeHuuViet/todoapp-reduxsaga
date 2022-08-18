@@ -1,10 +1,12 @@
 import './App.css';
-import FetchPost from './Components/FetchPost';
+import FetchTodoList from './Components/FetchTodoList';
+import TodoInput from './Components/TodoInput';
 
 function App() {
   return (
     <div className="App">
-      <FetchPost />
+      <FetchTodoList />
+      <TodoInput />
     </div>
   );
 }
