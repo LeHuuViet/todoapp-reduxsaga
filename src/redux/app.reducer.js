@@ -1,5 +1,4 @@
 const INITIAL_STATE = {
-  loading: false,
   todos: [],
   errors: null,
 };
@@ -8,17 +7,15 @@ const appReducer = (state = INITIAL_STATE, action) => {
   let newTodos;
   switch (action.type) {
     case "LOAD_TODO_START":
-      return { ...state, loading: true };
+      return { ...state};
     case "LOAD_TODO_SUCCESS":
       return {
         ...state,
-        loading: false,
         todos: action.payload,
       };
     case "LOAD_TODO_FAIL":
       return {
         ...state,
-        loading: false,
         errors: action.payload,
       };
     case "ADD_TODO_SAGA":
@@ -30,10 +27,10 @@ const appReducer = (state = INITIAL_STATE, action) => {
       newTodos = newTodos.filter((todo) => todo.id !== action.payload);
       return newTodos;
     case "UPDATE_TODO_SAGA":
-      // newTodos = [...state];
       const idx = state.todos.findIndex(
         (todo) => todo.id === action.payload.id
-      );
+        );
+      // newTodos = [...state];
       // let index = -1;
       // for (let i = 0; i < newTodos.length; i++) {
       //   index++;

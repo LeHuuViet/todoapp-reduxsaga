@@ -1,5 +1,5 @@
 import { takeLatest, put, all, call, fork } from "redux-saga/effects";
-import { loadTodoSuccess, loadTodoFail, loadTodoStart } from "./app.action";
+import { loadTodoSuccess, loadTodoFail, loadTodoStart, addTodoSaga } from "./app.action";
 import { addTodo, deleteTodo, loadTodoApi, updateTodo } from "../services/todo";
 
 export function* onloadTodoStartAsync() {
@@ -22,7 +22,7 @@ export function* onDeleteTodoSaga({ payload: { id } }) {
 }
 
 export function* onUpdateTodoSaga({ payload }) {
-  console.log(payload);
+  console.log(123)
   yield call(updateTodo, payload.id, payload.name);
   yield put(loadTodoStart());
 }
