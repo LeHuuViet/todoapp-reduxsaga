@@ -2,6 +2,8 @@ import { takeLatest, put, all, call, fork } from "redux-saga/effects";
 import { loadTodoSuccess, loadTodoFail, loadTodoStart, addTodoSaga } from "./app.action";
 import { addTodo, deleteTodo, loadTodoApi, updateTodo } from "../services/todo";
 
+
+// Side effects
 export function* onloadTodoStartAsync() {
   try {
     const response = yield call(loadTodoApi);
