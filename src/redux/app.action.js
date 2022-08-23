@@ -1,5 +1,6 @@
-export const loadTodoStart = () => ({
+export const loadTodoStart = (callback) => ({
   type: "LOAD_TODO_START",
+  payload: { callback }
 });
 
 export const loadTodoSuccess = (todos) => ({

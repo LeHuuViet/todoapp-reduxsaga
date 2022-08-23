@@ -4,12 +4,14 @@ import { addTodo, deleteTodo, loadTodoApi, updateTodo } from "../services/todo";
 
 
 // Side effects
-export function* onloadTodoStartAsync() {
+export function* onloadTodoStartAsync({ payload }) {
   try {
     const response = yield call(loadTodoApi);
     yield put(loadTodoSuccess(response.data));
+    payload.callback()
   } catch (error) {
     yield put(loadTodoFail(error));
+    payload.callback()
   }
 }
 
@@ -24,7 +26,6 @@ export function* onDeleteTodoSaga({ payload: { id } }) {
 }
 
 export function* onUpdateTodoSaga({ payload }) {
-  console.log(123)
   yield call(updateTodo, payload.id, payload.name);
   yield put(loadTodoStart());
 }

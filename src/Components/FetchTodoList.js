@@ -6,13 +6,18 @@ import TodoItem from "./TodoItem";
 const FetchTodo = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const fetchData = async () => {
+    setLoading(true)
+    dispatch(loadTodoStart(() => {
+      setLoading(false)
+    }));
+  }
+
+
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      dispatch(loadTodoStart());
-    }, 1000);
-  }, [dispatch]);
+    fetchData();
+  }, []);
 
   const state = useSelector((state) => state.app);
   if (loading) return <h1>Loading...</h1>;
